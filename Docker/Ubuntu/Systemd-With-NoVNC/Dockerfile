@@ -59,3 +59,6 @@ RUN apt-get update ; \
     snap install novnc
 
 RUN novnc --listen 6900 --vnc localhost:5900
+
+USER root
+CMD ["/lib/systemd/systemd"]
