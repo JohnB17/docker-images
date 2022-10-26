@@ -46,7 +46,7 @@ RUN chmod 755 ~/.vnc/xstartup
 
 # Install NoVNC
 RUN apt-get update ; \
-    apt install snapd ; \
+    apt install -y snapd ; \
     snap install novnc
 
 VOLUME [ "/sys/fs/cgroup" ]
