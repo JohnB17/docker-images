@@ -29,7 +29,11 @@ RUN apt-get update ; \
     rm -f /lib/systemd/system/anaconda.target.wants/* ; \
     rm -f /lib/systemd/system/plymouth* ; \
     rm -f /lib/systemd/system/systemd-update-utmp*
-    
+
+VOLUME [ "/sys/fs/cgroup" ]
+
+CMD ["/lib/systemd/systemd"]
+
 # Install xfce and NoVNC
 RUN apt-get update ; \
     apt-get install -y xfce4 xfce4-goodies ; \
@@ -54,7 +58,4 @@ RUN apt-get update ; \
     apt install snapd ; \
     snap install novnc
 
-VOLUME [ "/sys/fs/cgroup" ]
-
-CMD ["/lib/systemd/systemd"]
 RUN novnc --listen 6900 --vnc localhost:5900
