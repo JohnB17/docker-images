@@ -28,6 +28,20 @@ RUN apt-get update ; \
     rm -f /lib/systemd/system/anaconda.target.wants/* ; \
     rm -f /lib/systemd/system/plymouth* ; \
     rm -f /lib/systemd/system/systemd-update-utmp*
+    
+# Install xfce and NoVNC
+RUN apt-get update  ; \
+    apt-get install -y xfce4 xfce4-goodies ; \
+    apt-get install -y tightvncserver autocutsel
+
+# Setup root password from PASSWORD env
+COPY setpassword.sh .
+RUN chmod +x /setpassword.sh
+CMD ["/setpassword.sh"]
+
+# Set VNC startup file
+COPY xstartup /root/.vnc/xstartup
+RUN chmod 755 ~/.vnc/xstartup
 
 VOLUME [ "/sys/fs/cgroup" ]
 
