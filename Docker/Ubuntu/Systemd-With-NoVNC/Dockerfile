@@ -30,10 +30,6 @@ RUN apt-get update ; \
     rm -f /lib/systemd/system/plymouth* ; \
     rm -f /lib/systemd/system/systemd-update-utmp*
 
-VOLUME [ "/sys/fs/cgroup" ]
-
-CMD ["/lib/systemd/systemd"]
-
 # Install xfce and NoVNC
 RUN apt-get update ; \
     apt-get install -y xfce4 xfce4-goodies ; \
@@ -48,17 +44,15 @@ CMD ["/setpassword.sh"]
 COPY xstartup /root/.vnc/xstartup
 RUN chmod 755 ~/.vnc/xstartup
 
-# VNC server service
-COPY vncserver@.service /etc/systemd/system/vncserver@.service
-RUN systemctl enable vncserver@root ; \
-    systemctl start vncserver@root
-
 # Install NoVNC
 RUN apt-get update ; \
     apt install snapd ; \
     snap install novnc
 
-RUN novnc --listen 6900 --vnc localhost:5900
+VOLUME [ "/sys/fs/cgroup" ]
 
 USER root
-CMD ["/lib/systemd/systemd"]
+
+COPY startup.sh .
+RUN chmod +x /startup.sh
+CMD ["/startup.sh"]
