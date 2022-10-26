@@ -7,6 +7,7 @@ FROM ubuntu:22.04
 LABEL maintainer="JohnB <johnb@johnbdev.cf>"
 LABEL build_date="2022-10-26"
 
+ARG DEBIAN_FRONTEND=noninteractive
 ENV container docker
 
 # Enable apt repositories.
