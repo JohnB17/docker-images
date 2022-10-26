@@ -1,7 +1,16 @@
-name: Pterodactyl-Ubuntu
+name: Build-Docker-Images
 
 on:
   workflow_dispatch:
+    inputs:
+      imagename:
+        description: 'Image Name'
+        required: true
+        default: 'error'
+      imagedir:
+        description: 'Directory of the image'
+        required: true
+        default: 'default'
 
 jobs:
   push:
@@ -22,9 +31,9 @@ jobs:
           password: ${{ secrets.REGISTRY_TOKEN }}
       - uses: docker/build-push-action@v2
         with:
-          context: ./Pterodactyl/Ubuntu
-          file: ./Pterodactyl/Ubuntu/Dockerfile
+          context: ./${{ github.event.inputs.imagedir }}
+          file: ./${{ github.event.inputs.imagedir }}/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/johnb17/pterodactyl-ubuntu:latest
+            ghcr.io/johnb17/docker-images:${{ github.event.inputs.imagename }}
