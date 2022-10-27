@@ -38,14 +38,17 @@ RUN apt-get update ; \
 # Setup root password from PASSWORD env
 COPY setpassword.sh .
 RUN chmod +x /setpassword.sh
-CMD ["/setpassword.sh"]
+RUN ["/setpassword.sh"]
 
 # Set VNC startup file
 COPY xstartup /root/.vnc/xstartup
 RUN chmod 755 ~/.vnc/xstartup
 
 # Install NoVNC
-RUN apt-get update ; \
+RUN /lib/systemd/systemd ; \
+    service snapd start ; \
+    systemctl start snapd.service ; \
+    apt-get update ; \
     apt install -y snapd ; \
     snap install novnc
 
