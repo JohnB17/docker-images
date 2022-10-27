@@ -46,9 +46,9 @@ COPY xstartup /root/.vnc/xstartup
 RUN chmod 755 ~/.vnc/xstartup
 
 # Install NoVNC
-RUN mkdir /novnc ; \
-    wget https://github.com/novnc/noVNC/archive/refs/tags/v1.3.0.zip /novnc ; \
-    cd /novnc ; \
+RUN mkdir /novnc
+COPY noVNC-1.3.0.zip /novnc
+RUN cd /novnc ; \
     unzip v1.3.0.zip
 
 VOLUME [ "/sys/fs/cgroup" ]
