@@ -10,6 +10,10 @@ LABEL build_date="2022-10-26"
 ARG DEBIAN_FRONTEND=noninteractive
 ENV container docker
 
+RUN mkdir /home/headless
+USER headless
+ENV USER=headless HOME=/home/headless
+
 # Enable apt repositories.
 RUN sed -i 's/# deb/deb/g' /etc/apt/sources.list
 
@@ -52,10 +56,6 @@ RUN cd /novnc ; \
     unzip noVNC-1.3.0.zip
 
 VOLUME [ "/sys/fs/cgroup" ]
-
-RUN mkdir /home/headless
-USER headless
-ENV USER=headless HOME=/home/headless
 
 COPY startup.sh /home/headless
 RUN chmod +x /home/headless/startup.sh
