@@ -38,7 +38,7 @@ RUN apt-get update ; \
 
 # Setup root password from PASSWORD env
 COPY setpassword.sh .
-RUN chmod +x /setpassword.sh
+RUN chmod +x ./setpassword.sh
 RUN ./setpassword.sh
 
 # Set VNC startup file
@@ -56,6 +56,6 @@ VOLUME [ "/sys/fs/cgroup" ]
 USER root
 ENV USER=root HOME=/root
 
-COPY startup.sh .
-RUN chmod +x /startup.sh
+COPY startup.sh /root
+RUN chmod +x /root/startup.sh
 CMD ["/root/startup.sh"]
