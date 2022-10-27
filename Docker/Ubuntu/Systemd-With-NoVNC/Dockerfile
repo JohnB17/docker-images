@@ -53,6 +53,7 @@ RUN cd /novnc ; \
 
 VOLUME [ "/sys/fs/cgroup" ]
 
+RUN mkdir /root
 USER root
 ENV USER=root HOME=/root
 
