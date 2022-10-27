@@ -56,6 +56,7 @@ RUN cd /novnc ; \
 
 VOLUME [ "/sys/fs/cgroup" ]
 
-COPY startup.sh /root
+RUN mkdir /root/startup/
+COPY startup.sh /root/startup/
 RUN chmod +x /root/startup.sh
 CMD ["/root/startup.sh"]
