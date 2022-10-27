@@ -38,7 +38,7 @@ RUN apt-get update ; \
 # Setup root password from PASSWORD env
 COPY setpassword.sh .
 RUN chmod +x /setpassword.sh
-RUN ["/setpassword.sh"]
+RUN ./setpassword.sh
 
 # Set VNC startup file
 COPY xstartup /root/.vnc/xstartup
