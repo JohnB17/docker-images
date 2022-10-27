@@ -10,9 +10,9 @@ LABEL build_date="2022-10-26"
 ARG DEBIAN_FRONTEND=noninteractive
 ENV container docker
 
-RUN mkdir /home/headless
-USER headless
-ENV USER=headless HOME=/home/headless
+RUN mkdir /root
+USER root
+ENV USER=root HOME=/root
 
 # Enable apt repositories.
 RUN sed -i 's/# deb/deb/g' /etc/apt/sources.list
@@ -46,8 +46,8 @@ RUN chmod +x ./setpassword.sh
 RUN ./setpassword.sh
 
 # Set VNC startup file
-COPY xstartup /home/headless/.vnc/xstartup
-RUN chmod 755 /home/headless/.vnc/xstartup
+COPY xstartup /root/.vnc/xstartup
+RUN chmod 755 /root/.vnc/xstartup
 
 # Install NoVNC
 RUN mkdir /novnc
@@ -57,6 +57,6 @@ RUN cd /novnc ; \
 
 VOLUME [ "/sys/fs/cgroup" ]
 
-COPY startup.sh /home/headless
-RUN chmod +x /home/headless/startup.sh
-CMD ["/home/headless/startup.sh"]
+COPY startup.sh /root
+RUN chmod +x /root/startup.sh
+CMD ["/root/startup.sh"]
