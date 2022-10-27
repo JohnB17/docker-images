@@ -49,7 +49,7 @@ RUN chmod 755 ~/.vnc/xstartup
 RUN mkdir /novnc
 COPY noVNC-1.3.0.zip /novnc
 RUN cd /novnc ; \
-    unzip v1.3.0.zip
+    unzip noVNC-1.3.0.zip
 
 VOLUME [ "/sys/fs/cgroup" ]
 
