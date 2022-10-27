@@ -10,7 +10,6 @@ LABEL build_date="2022-10-26"
 ARG DEBIAN_FRONTEND=noninteractive
 ENV container docker
 
-RUN mkdir /root
 USER root
 ENV USER=root HOME=/root
 
