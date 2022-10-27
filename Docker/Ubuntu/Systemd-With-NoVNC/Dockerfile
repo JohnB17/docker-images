@@ -42,8 +42,8 @@ RUN chmod +x ./setpassword.sh
 RUN ./setpassword.sh
 
 # Set VNC startup file
-COPY xstartup /root/.vnc/xstartup
-RUN chmod 755 ~/.vnc/xstartup
+COPY xstartup /home/headless/.vnc/xstartup
+RUN chmod 755 /home/headless/.vnc/xstartup
 
 # Install NoVNC
 RUN mkdir /novnc
@@ -53,10 +53,10 @@ RUN cd /novnc ; \
 
 VOLUME [ "/sys/fs/cgroup" ]
 
-RUN mkdir /root
-USER root
-ENV USER=root HOME=/root
+RUN mkdir /home/headless
+USER headless
+ENV USER=headless HOME=/home/headless
 
-COPY startup.sh /root
-RUN chmod +x /root/startup.sh
-CMD ["/root/startup.sh"]
+COPY startup.sh /home/headless
+RUN chmod +x /home/headless/startup.sh
+CMD ["/home/headless/startup.sh"]
