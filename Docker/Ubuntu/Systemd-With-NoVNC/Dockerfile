@@ -15,6 +15,7 @@ RUN sed -i 's/# deb/deb/g' /etc/apt/sources.list
 
 # Enable systemd.
 RUN apt-get update ; \
+    apt-get install -y curl wget unzip tar ; \
     apt-get install -y systemd systemd-sysv ; \
     apt-get clean ; \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ; \
@@ -45,17 +46,17 @@ COPY xstartup /root/.vnc/xstartup
 RUN chmod 755 ~/.vnc/xstartup
 
 # Install NoVNC
-RUN /lib/systemd/systemd ; \
-    service snapd start ; \
-    systemctl start snapd.service ; \
-    apt-get update ; \
-    apt install -y snapd ; \
-    snap install novnc
+RUN apt-get update ; \
+    mkdir /var/novnc ; \
+    wget https://github.com/novnc/noVNC/archive/refs/tags/v1.3.0.zip /var/novnc
+    cd /var/novnc ; \
+    unzip /var/novnc/v1.3.0.zip ; \
 
 VOLUME [ "/sys/fs/cgroup" ]
 
 USER root
+ENV USER=root HOME=/root
 
 COPY startup.sh .
 RUN chmod +x /startup.sh
-CMD ["/startup.sh"]
+CMD ["/root/startup.sh"]
