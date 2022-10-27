@@ -1,2 +1,2 @@
-echo $PASSWORD | passwd --stdin root
+echo "root:$PASSWORD" | chpasswd
 echo $PASSWORD | vncpasswd -f
