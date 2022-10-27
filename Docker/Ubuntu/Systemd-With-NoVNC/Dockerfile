@@ -58,5 +58,5 @@ VOLUME [ "/sys/fs/cgroup" ]
 
 RUN mkdir /root/startup/
 COPY startup.sh /root/startup/
-RUN chmod +x /root/startup.sh
-CMD ["/root/startup.sh"]
+RUN chmod +x /root/startup/startup.sh
+CMD ["/root/startup/startup.sh"]
