@@ -29,10 +29,7 @@ echo " This build process requires all of the ioquake3 dependencies necessary fo
 
  IOQ3REMOTE=https://github.com/something/something.git COPYDIR=~/somewhere $0"
 
-BUILD_DIR="$(mktemp -d)"
-trap "rm -rf $BUILD_DIR" EXIT
-
-git clone $IOQ3REMOTE $BUILD_DIR/ioq3
+git clone $IOQ3REMOTE /mnt/server/ioq3
 cd $BUILD_DIR/ioq3
 make $MAKE_OPTS
 make copyfiles
