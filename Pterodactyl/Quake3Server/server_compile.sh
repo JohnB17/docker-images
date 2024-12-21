@@ -17,18 +17,6 @@ if ! [ -x "$(command -v git)" ] || ! [ -x "$(command -v make)" ]; then
         exit 1
 fi
 
-echo " This build process requires all of the ioquake3 dependencies necessary for an ioquake3 server.
- If you do not have the necessary dependencies the build will fail.
-
- Please post a message to http://discourse.ioquake.org/ asking for help and include whatever error messages you received during the compile phase.
-
- We will be building from the git repo at ${IOQ3REMOTE}
- The resulting binary will be installed to ${COPYDIR}
-
- If you need to change these, please set variables as follows:
-
- IOQ3REMOTE=https://github.com/something/something.git COPYDIR=~/somewhere $0"
-
 git clone $IOQ3REMOTE /mnt/server/ioq3
 cd $BUILD_DIR/ioq3
 make $MAKE_OPTS
